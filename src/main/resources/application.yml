@@ -1,0 +1,30 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/jeju
+    username: root
+    password: 010810
+  jpa:
+    show-sql: true
+    hibernate.ddl-auto: update
+    properties:
+      hibernate.format_sql: true
+  security:
+    oauth2:
+      client:
+        registration:
+          kakao:
+            client-id: 82ee1e22b77d96174df564b98166f90b
+            redirect-uri: http://localhost:19006/user/kakao
+            authorization-grant-type: authorization_code
+            client-authentication-method: POST
+            client-name: Kakao
+            scope:
+              - profile_nickname
+              - account_email
+        provider:
+          kakao:
+            authorization-uri: https://kauth.kakao.com/oauth/authorize
+            token-uri: https://kauth.kakao.com/oauth/token
+            user-info-uri: https://kapi.kakao.com/v2/user/me
+            user-name-attribute: id

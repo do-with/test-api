@@ -17,19 +17,32 @@ public class SecurityConfig {
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         http
-//                .csrf().disable();
-                .authorizeHttpRequests().requestMatchers(
-                    new AntPathRequestMatcher("/**")).permitAll();
-//            .and()
-//                .csrf().ignoringRequestMatchers(
-//                        new AntPathRequestMatcher("/h2-console/**"))
-//            .and()
-//                .headers()
-//                .addHeaderWriter(new XFrameOptionsHeaderWriter(
-//                        XFrameOptionsHeaderWriter.XFrameOptionsMode.SAMEORIGIN))
+                .authorizeRequests()
+                .requestMatchers(new AntPathRequestMatcher("/**"))
+                .permitAll()
+                .and()
+                .oauth2Login();
 
         return http.build();
     }
+//    @Bean
+//    SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
+//        http
+////                .csrf().disable();
+//                .oauth2Login()
+//                .and()
+//                .authorizeHttpRequests().requestMatchers(
+//                    new AntPathRequestMatcher("/**")).permitAll();
+////            .and()
+////                .csrf().ignoringRequestMatchers(
+////                        new AntPathRequestMatcher("/h2-console/**"))
+////            .and()
+////                .headers()
+////                .addHeaderWriter(new XFrameOptionsHeaderWriter(
+////                        XFrameOptionsHeaderWriter.XFrameOptionsMode.SAMEORIGIN))
+//
+//        return http.build();
+//    }
     @Bean
     PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
